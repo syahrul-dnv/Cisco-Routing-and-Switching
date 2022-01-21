@@ -1,4 +1,5 @@
 <img src="https://drive.google.com/uc?export=view&id=14dxmpJUBNqymVqcHzJtCGs82FfjB1_Nn">
+
 # Cisco-Router
 Router Cisco merupakan sebuah peralatan yang sering dipakai untuk jaringan WAN atau Wide Area Network. Dengan mengunakan peralatan ini maka informasi bisa didistribusikan atau disampaikan ke berbagai alamat yang jaraknya jauh. Dalam menjalankan tugasnya, Router Cisco menggunakan protocol dan juga tabel yang berperan penting di dalam mengatur lalu lintas data.
 
