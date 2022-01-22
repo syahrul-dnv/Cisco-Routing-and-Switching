@@ -8,11 +8,11 @@ Sebagai bahan latihan disini kita akan menggunakan bantuan software Packet Trace
 
 ## Mengenal Mode dalam Konfigurasi Cisco Router
 Sebelum melakukan konfigurasi, ada baiknya kita mengetahui terlebih dahulu, bahwa dalam perintah Cisco terdapat 3 mode yaitu <b>User Mode, Privilege Mode, dan Global Configuration Mode.</b>
-### User Mode
+### 1. User Mode
 Mode ini adalah mode awal saat melakukan console pada router. Dalam User Mode anda akan melihat tanda <b>Router></b>. Dalam mode ini kita hanya bisa melihat informasi dasar pada <b>router.</b>
-### Privilege Mode
+### 2. Privilege Mode
 Mode selanjutnya adalah Privilege Mode, kita bisa masuk ke mode ini dengan mengetikkan <b>enable</b> atau cukup ketik <b>en</b> saja. Setelah masuk maka tanda akan berubah menjadi <b>Router#.</b>
-### Global Configuration Mode
+### 3. Global Configuration Mode
 Mode ini merupakan mode tertinggi dimana kita bisa melakukan hampir semua konfigurasi terhadap Router. Untuk bisa mengakses mode ini setelah ketik <b>configure terminal</b> atau bisa juga diketik <b>conf t</b> saat kita berada pada mode Privilege Mode, Setelah masuk maka tanda akan berubah menjadi <b>Router(config)#</b>.
 
 Untuk melihat perintah-perintah apa saja yang dapat dijalankan pada User Mode, Privilege Mode atau Global Configuration Mode, cukup ketikkan tanda <b>?</b> pada masing-masing mode tersebut.
@@ -103,67 +103,102 @@ line vty 0 4
 !
 end</pre>
 
-Router>en
+## 1. Memberi Nama Router, gunakan perintah hostname [nama_router]
+<pre>Router>en
 Router#conf t
 Enter configuration commands, one per line.  End with CNTL/Z.
 Router(config)#hostname pcnetlabs-R0
-pcnetlabs-R0(config)#
+pcnetlabs-R0(config)#</pre>
 
-pcnetlabs-R0>en
+## 2. Memberikan Password
+Untuk membatasi akses ke Router kita, kita akan men-set password saat user akan masuk ke Privilege Mode, mengakses Router melalui console dan pada saat mengakses router melalui aux port.
+
+### 2.1 Set Password untuk akses ke Privilege Mode
+
+Untuk mengaktifkan password biasa, gunakan perintah enable <b>password [kata_sandi]</b>. Untuk mengaktifkan password yang terenkripsi gunakan perintah <b>enable secret [kata_sandi]</b>. enable secret mempunyai prioritas yang lebih tinggi dibanding enable password, sehingga apabila diseting dua-duanya, maka nantinya kata_sandi secret yang akan dipakai untuk masuk ke Privilege Mode
+
+
+<pre>pcnetlabs-R0>en
 pcnetlabs-R0#conf t
 Enter configuration commands, one per line.  End with CNTL/Z.
 pcnetlabs-R0(config)#enable password pcnetpass
-pcnetlabs-R0(config)#enable secret pcnetsec
+pcnetlabs-R0(config)#enable secret pcnetsec</pre>
 
-pcnetlabs-R0(config)#line console 0
+### 2.2 Set Password Console
+
+Router mempunyai 1 buah console, untuk memproteksinya gunakan perintah – perintah berikut:
+
+<pre>pcnetlabs-R0(config)#line console 0
 pcnetlabs-R0(config-line)#password pcnetconsolepass
 pcnetlabs-R0(config-line)#exec-timeout 5
 pcnetlabs-R0(config-line)#login
-pcnetlabs-R0(config-line)#
+pcnetlabs-R0(config-line)#</pre>
 
-pcnetlabs-R0(config)#line vty 0 4
+### 2.3 Set Password Virtual Terminal
+
+Mengaktifkan password pada line virtual terminal, agar hanya orang yang mengetahui/ memiliki password saya yang bisa mengakses router melalui line virtual terminal. Router hanya memiliki 5 buah line virtual terminal (vty). Berikut perintah untuk mengaktifkan password pada line virtual terminal.
+
+<pre>pcnetlabs-R0(config)#line vty 0 4
 pcnetlabs-R0(config-line)#password pcnetvtypass
 pcnetlabs-R0(config-line)#exec-timeout 5
-pcnetlabs-R0(config-line)#login
+pcnetlabs-R0(config-line)#login</pre>
+
+### 2.4 Set Password Auxiliary
+
+Router hanya memiliki 1 buah line aux, untuk mengaktifkan password pada akses ke line aux ini bisa menggunakan perintah sebagai berikut:
 
 
-pcnetlabs-R0(config)#line aux 0
+<pre>pcnetlabs-R0(config)#line aux 0
 pcnetlabs-R0(config-line)#password pcnetauxpass
 pcnetlabs-R0(config-line)#exec-timeout 5
-pcnetlabs-R0(config-line)#login
+pcnetlabs-R0(config-line)#login</pre>
 
-pcnetlabs-R0(config)#interface fastEthernet 0/0
+## 3. Set IP Address
+
+Untuk memberikan / set IP Address pada interface, gunakan perintah berikut:
+
+<pre>pcnetlabs-R0(config)#interface fastEthernet 0/0
 pcnetlabs-R0(config-if)#ip address 192.168.2.1 255.255.255.0
 pcnetlabs-R0(config-if)#no shut
 
 pcnetlabs-R0(config)#interface fastEthernet 0/1
 pcnetlabs-R0(config-if)#ip address 10.0.0.1 255.255.255.0
-pcnetlabs-R0(config-if)#no shut
+pcnetlabs-R0(config-if)#no shut</pre>
 
-pcnetlabs-R0#ping 192.168.2.1
+Selanjutnya konfigure IP Address untuk pcnetlabs-PC0 dan pcnetlabs-R1, kemudian cek ping dari console R0 apakah sudah bisa terhubung.
+
+<pre>pcnetlabs-R0#ping 192.168.2.1
 
 Type escape sequence to abort.
 Sending 5, 100-byte ICMP Echos to 192.168.2.1, timeout is 2 seconds:
 !!!!!
 Success rate is 100 percent (5/5), round-trip min/avg/max = 0/1/4 ms
 
+
 pcnetlabs-R0#ping 10.0.0.2
 
 Type escape sequence to abort.
 Sending 5, 100-byte ICMP Echos to 10.0.0.2, timeout is 2 seconds:
 !!!!!
-Success rate is 100 percent (5/5), round-trip min/avg/max = 0/0/1 ms
+Success rate is 100 percent (5/5), round-trip min/avg/max = 0/0/1 ms</pre>
 
-pcnetlabs-R0#write memory 
+
+## 4. Save Konfigurasi
+
+Untuk menyimpan konfigurasi bisa dengan menggunakan perintah <b>write memory</b> atau dengan perintah <b>copy running-config startup-config</b>.
+
+<pre>pcnetlabs-R0#write memory 
 Building configuration...
-[OK]
+[OK]</pre>
 
-pcnetlabs-R0#copy running-config startup-config 
+<pre>pcnetlabs-R0#copy running-config startup-config 
 Destination filename [startup-config]? 
 Building configuration...
-[OK]
+[OK]</pre>
 
-pcnetlabs-R0#show startup-config 
+Terakhir kita cek konfigurasi dasar cisco router yang telah kita buat dan kita simpan dengan perintah show startup-config berikut:
+
+<pre>pcnetlabs-R0#show startup-config 
 Using 750 bytes
 !
 version 12.4
@@ -243,4 +278,4 @@ line vty 0 4
 !
 !
 !
-end
+end</pre>
