@@ -279,3 +279,16 @@ line vty 0 4
 !
 !
 end</pre>
+
+## 5. Menghapus Konfigurasi
+
+Untuk menghapus konfigurasi yang telah kita buat dan telah tersimpan pada memory (startup-config). Jalankan perintah erase startup-config.
+
+<pre>pcnetlabs-R0#erase startup-config 
+Erasing the nvram filesystem will remove all configuration files! Continue? [confirm]
+[OK]</pre>
+
+<pre>pcnetlabs-R0#show startup-config 
+startup-config is not present</pre>
+
+### Selamat mencoba!
