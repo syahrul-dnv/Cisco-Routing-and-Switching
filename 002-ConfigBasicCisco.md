@@ -4,7 +4,7 @@ Dalam lab pertama tentang konfigurasi Cisco router ini, kita akan mencoba untuk 
 
 Sebagai bahan latihan disini kita akan menggunakan bantuan software Packet Tracer dengan topology seperti berikut:
 
-<img src="https://drive.google.com/uc?export=view&id=1EHQfzz4v93D4yKt36FqYz8zMBYExToBp">
+<center><img src="https://drive.google.com/uc?export=view&id=1EHQfzz4v93D4yKt36FqYz8zMBYExToBp"></center>
 
 ## Mengenal Mode dalam Konfigurasi Cisco Router
 Sebelum melakukan konfigurasi, ada baiknya kita mengetahui terlebih dahulu, bahwa dalam perintah Cisco terdapat 3 mode yaitu <b>User Mode, Privilege Mode, dan Global Configuration Mode.</b>
