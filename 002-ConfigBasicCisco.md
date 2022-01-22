@@ -1,7 +1,30 @@
-Router>en
+# Konfigurasi Dasar Cisco Router
+
+Dalam lab pertama tentang konfigurasi Cisco router ini, kita akan mencoba untuk menerapkan konfigurasi dasar yang biasa dibuat pertama kali seperti memberikan nama device, memberikan password, memberikan IP Address, menampilkan, menyimpan dan menghapus konfigurasi yang telah kita buat dan lain sebagainya.
+
+Sebagai bahan latihan disini kita akan menggunakan bantuan software Packet Tracer dengan topology seperti berikut:
+
+<img src="https://drive.google.com/uc?export=view&id=1EHQfzz4v93D4yKt36FqYz8zMBYExToBp">
+
+## Mengenal Mode dalam Konfigurasi Cisco Router
+Sebelum melakukan konfigurasi, ada baiknya kita mengetahui terlebih dahulu, bahwa dalam perintah Cisco terdapat 3 mode yaitu <b>User Mode, Privilege Mode, dan Global Configuration Mode.</b>
+### User Mode
+Mode ini adalah mode awal saat melakukan console pada router. Dalam User Mode anda akan melihat tanda <b>Router></b>. Dalam mode ini kita hanya bisa melihat informasi dasar pada <b>router.</b>
+### Privilege Mode
+Mode selanjutnya adalah Privilege Mode, kita bisa masuk ke mode ini dengan mengetikkan <b>enable</b> atau cukup ketik <b>en</b> saja. Setelah masuk maka tanda akan berubah menjadi <b>Router#.</b>
+### Global Configuration Mode
+Mode ini merupakan mode tertinggi dimana kita bisa melakukan hampir semua konfigurasi terhadap Router. Untuk bisa mengakses mode ini setelah ketik <b>configure terminal</b> atau bisa juga diketik <b>conf t</b> saat kita berada pada mode Privilege Mode, Setelah masuk maka tanda akan berubah menjadi <b>Router(config)#</b>.
+
+Untuk melihat perintah-perintah apa saja yang dapat dijalankan pada User Mode, Privilege Mode atau Global Configuration Mode, cukup ketikkan tanda <b>?</b> pada masing-masing mode tersebut.
+
+## Step by step Konfigurasi Dasar Cisco Router
+Sebelum mengkonfigurasi Router, kita akan cek dulu konfigurasi yang saat ini, dengan perintah <b>show running-confi</b> untuk konfigurasi saat ini yang sedang running atau dengan perintah <b>show startup-config</b> untuk melihat konfigurasi yang telah tersimpan dan akan di-load pada saat router start-up.
+
+<pre>Router>en
 Router# show startup-config 
-startup-config is not present
-Router>en
+startup-config is not present</pre>
+
+<pre>Router>en
 Router#show running-config 
 Building configuration...
 
@@ -78,7 +101,7 @@ line vty 0 4
 !
 !
 !
-end
+end</pre>
 
 Router>en
 Router#conf t
