@@ -1,2 +1,0 @@
-# VLAN TRUNKs
-Trunk pada VLAN adalah penghubung banyak VLAN yang berada di antara switch atau switch dengan router. Trunk berfungsi sebagai pengangkut banyak VLAN melewati sebuah jalur. Sehingga satu jalur atau port dapat membawa banyak VLAN.
